@@ -388,6 +388,7 @@ const isValidOperationBody = bodyOfFunction(parser, "isValidOperation");
  * TODO 1 — Required utils structure only
  * calculator.js is NOT part of creation grading.
  */
+
 {
   const required = [
     {
@@ -442,6 +443,7 @@ const isValidOperationBody = bodyOfFunction(parser, "isValidOperation");
 /**
  * TODO 3 — Parse command line arguments
  */
+
 {
   if (!calculator) {
     failTask(tasks[2], "calculator.js not found / unreadable.");
@@ -468,6 +470,26 @@ const isValidOperationBody = bodyOfFunction(parser, "isValidOperation");
 /**
  * TODO 4 — Validate input and calculate
  */
+ export function add(numbers) {
+   return numbers.reduce((sum, num) => sum + num, 0);
+ }
+
+ export function subtract(numbers) {
+   return numbers.slice(1).reduce((result, num) => result - num, numbers[0]);
+ }
+
+ export function multiply(numbers) {
+   return numbers.reduce((product, num) => product * num, 1);
+ }
+
+ export function divide(numbers) {
+   return numbers.slice(1).reduce((result, num) => {
+     if (num === 0) {
+       return NaN; // handle division by zero
+     }
+     return result / num;
+   }, numbers[0]);
+ }
 {
   if (!calculator) {
     failTask(tasks[3], "calculator.js not found / unreadable.");
@@ -521,6 +543,14 @@ const isValidOperationBody = bodyOfFunction(parser, "isValidOperation");
 /**
  * TODO 5 — add + subtract implementation
  */
+   export function parseNumbers(input) {
+     const numbers = _.map(input, (str) => Number(str));
+     return _.compact(numbers);
+   }
+     export function isValidOperation(operation) {
+       const validOps = ["add", "subtract", "multiply", "divide"];
+       return _.includes(validOps, operation);
+     }
 {
   if (!operationCode) {
     failTask(tasks[4], "utils/operation.js or utils/operations.js not found / unreadable.");
